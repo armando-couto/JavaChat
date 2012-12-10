@@ -1,17 +1,12 @@
 package chat;
 
-
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.PrintWriter;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
 import java.net.Socket;
-import java.net.SocketException;
-import java.util.Enumeration;
 import java.util.Scanner;
 
 import javax.swing.JButton;
@@ -38,10 +33,10 @@ public class ChatCliente extends JFrame {
 		@Override
 		public void run() {
 			try {
-			String texto;
-			while ((texto = leitor.nextLine()) != null) {
-				textoRecebido.append(texto + "\n");
-			}
+				String texto;
+				while ((texto = leitor.nextLine()) != null) {
+					textoRecebido.append(texto + "\n");
+				}
 			} catch (Exception e) {}
 		}
 	}
@@ -98,26 +93,5 @@ public class ChatCliente extends JFrame {
 	
 	public static void main(String[] args) {
 		new ChatCliente(JOptionPane.showInputDialog(null, "Digite seu nome:"));
-//		Enumeration nis = null;
-//		try {
-//			nis = NetworkInterface.getNetworkInterfaces();
-//		} catch (SocketException e) {
-//			e.printStackTrace();
-//		}
-//				
-//		while (nis.hasMoreElements()) {  
-//			NetworkInterface ni = (NetworkInterface) nis.nextElement();  
-//			Enumeration ias = ni.getInetAddresses();
-//					
-//			while (ias.hasMoreElements()) {  
-//				InetAddress ia = (InetAddress) ias.nextElement();
-//				if (!ni.getName().equals("lo"))
-//					System.out.println(ia.getHostAddress());   
-//			}  
-//		}
-		
-		// Ele retorna.
-		//		fe80:0:0:0:213:d4ff:fe7f:4d9d%2 
-		//		111.222.333.444
 	}
 }
