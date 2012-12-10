@@ -1,4 +1,4 @@
-package cliente;
+package chat;
 
 
 import java.awt.BorderLayout;
@@ -7,7 +7,11 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.net.Socket;
+import java.net.SocketException;
+import java.util.Enumeration;
 import java.util.Scanner;
 
 import javax.swing.JButton;
@@ -18,7 +22,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class ClienteChat extends JFrame {
+public class ChatCliente extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -43,7 +47,7 @@ public class ClienteChat extends JFrame {
 	}
 	
 	
-	public ClienteChat(String nome) {
+	public ChatCliente(String nome) {
 		super("Chat : " + nome);
 		this.nome = nome;
 		
@@ -85,7 +89,7 @@ public class ClienteChat extends JFrame {
 	
 	private void configurarRede() {
 		try {
-			socket = new Socket("127.0.0.1", 5000);
+			socket = new Socket("25.219.143.73", 5000);
 			escritor = new PrintWriter(socket.getOutputStream());
 			leitor = new Scanner(socket.getInputStream());
 			new Thread(new EscutaServidor()).start();
@@ -93,6 +97,27 @@ public class ClienteChat extends JFrame {
 	}
 	
 	public static void main(String[] args) {
-		new ClienteChat(JOptionPane.showInputDialog(null, "Digite seu nome:"));
+		new ChatCliente(JOptionPane.showInputDialog(null, "Digite seu nome:"));
+//		Enumeration nis = null;
+//		try {
+//			nis = NetworkInterface.getNetworkInterfaces();
+//		} catch (SocketException e) {
+//			e.printStackTrace();
+//		}
+//				
+//		while (nis.hasMoreElements()) {  
+//			NetworkInterface ni = (NetworkInterface) nis.nextElement();  
+//			Enumeration ias = ni.getInetAddresses();
+//					
+//			while (ias.hasMoreElements()) {  
+//				InetAddress ia = (InetAddress) ias.nextElement();
+//				if (!ni.getName().equals("lo"))
+//					System.out.println(ia.getHostAddress());   
+//			}  
+//		}
+		
+		// Ele retorna.
+		//		fe80:0:0:0:213:d4ff:fe7f:4d9d%2 
+		//		111.222.333.444
 	}
 }
