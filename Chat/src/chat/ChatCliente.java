@@ -84,7 +84,7 @@ public class ChatCliente extends JFrame {
 	
 	private void configurarRede() {
 		try {
-			socket = new Socket("25.219.143.73", 5000);
+			socket = new Socket("10.50.54.146", 5000);
 			escritor = new PrintWriter(socket.getOutputStream());
 			leitor = new Scanner(socket.getInputStream());
 			new Thread(new EscutaServidor()).start();

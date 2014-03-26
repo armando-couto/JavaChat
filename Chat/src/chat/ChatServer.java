@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ChatServer {
-	
+
 	List<PrintWriter> escritores = new ArrayList<>();
-	
+
 	public ChatServer() {
 		ServerSocket server;
 		try {
@@ -21,40 +21,44 @@ public class ChatServer {
 				new Thread(new EscutaCliente(socket)).start();
 				escritores.add(new PrintWriter(socket.getOutputStream()));
 			}
-		} catch (IOException e) {}
+		} catch (IOException e) {
+		}
 	}
-	
+
 	private void encaminharParaTodos(String texto) {
 		for (PrintWriter w : escritores) {
 			try {
 				w.println(texto);
 				w.flush();
-			} catch (Exception e) {}
+			} catch (Exception e) {
+			}
 		}
 	}
-	
+
 	private class EscutaCliente implements Runnable {
 
 		Scanner leitor;
-		
+
 		public EscutaCliente(Socket socket) {
 			try {
 				leitor = new Scanner(socket.getInputStream());
-			} catch (Exception e) {}
+			} catch (Exception e) {
+			}
 		}
-		
+
 		@Override
 		public void run() {
 			try {
 				String texto;
 				while ((texto = leitor.nextLine()) != null) {
-					System.out.println(texto);
+					// System.out.println(texto);
 					encaminharParaTodos(texto);
 				}
-			} catch (Exception e) {}
+			} catch (Exception e) {
+			}
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		new ChatServer();
 	}
